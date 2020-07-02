@@ -50,22 +50,22 @@ export async function handler(event, context) {
         }
     }
     else {
-        const str = body
-            |> JSON.stringify
-            |> (async v => compress ? await gzipAsync(v) : v)
-
+        const str = await gzipAsync(JSON.stringify(body))
+        console.log(str)
+        console.log(body)
         console.log('Compressed', str.length / body.length)
 
         return {
             statusCode: 200,
+            isBase64Encoded: true,
             headers: _.assign(
                 {
                     'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json'
-                },
-                compress ? { 'Content-Encoding': 'gzip' } : null
+                    'Content-Type': 'application/json',
+                    'Content-Encoding': 'gzip'
+                }
             ),
-            body: str
+            body: str.toString('base64')
         }
     }
 }
