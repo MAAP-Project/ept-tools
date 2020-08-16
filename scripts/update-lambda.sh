@@ -5,7 +5,7 @@ cd ${DIR}/..
 
 ./scripts/build-lambda-zip.sh
 
-FUNCTION=${FUNCTION:="ept-serve-tiles"}
+FUNCTION=${FUNCTION:="${DEPLOYMENT_PREFIX}-ept-serve-tiles"}
 REGION=${REGION:="us-east-1"}
 
 if [ ! -f package/lambda.zip ]

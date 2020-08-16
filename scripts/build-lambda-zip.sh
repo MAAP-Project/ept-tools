@@ -9,11 +9,11 @@ echo "Creating lambda .zip package"
 echo "  Zip: lambda.zip"
 echo "  Handler: lib/lambda.handler"
 
-npm pack --silent &&
+npm pack &&
     (
         tar -xf ept-tools-${VERSION}.tgz && \
         (
-            cd package/ && npm install --production --silent && \
+            cd package/ && npm install --production && \
             zip lambda.zip -r ./* -q
         )
     )
