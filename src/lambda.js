@@ -51,8 +51,6 @@ export async function handler(event, context) {
     }
     else {
         const str = await gzipAsync(JSON.stringify(body))
-        console.log(str)
-        console.log(body)
         console.log('Compressed', str.length / body.length)
 
         return {
