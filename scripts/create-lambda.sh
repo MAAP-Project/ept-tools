@@ -3,7 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd ${DIR}/..
 
-#./scripts/build-lambda-zip.sh
+./scripts/build-lambda-zip.sh
 
 FUNCTION=${FUNCTION:="ept-serve-tiles"}
 REGION=${REGION:="us-east-1"}
@@ -15,7 +15,7 @@ echo "  Region: ${REGION}"
 echo "  Role: ${ROLE_ARN}"
 echo "  Handler: lib/lambda.handler"
 
-aws2 lambda create-function \
+aws lambda create-function \
     --runtime "nodejs10.x" \
     --role ${ROLE} \
     --region ${REGION} \
