@@ -14,7 +14,7 @@ then
 fi
 
 echo "Updating lambda function"
-aws2 lambda update-function-code \
+aws lambda update-function-code \
     --function-name ${FUNCTION} \
     --region ${REGION} \
     --zip-file fileb://package/lambda.zip && \
