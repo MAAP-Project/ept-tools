@@ -7,7 +7,7 @@ cd ${DIR}/..
 
 FUNCTION=${FUNCTION:="ept-serve-tiles"}
 REGION=${REGION:="us-east-1"}
-ROLE_ARN=${ROLE:="arn:aws:iam::532321095167:role/aimee-lambda-api-gateway"}
+ROLE_ARN=${ROLE:=$API_GATEWAY_LAMBDA_ROLE}
 
 echo "Creating lambda function"
 echo "  Function: ${FUNCTION}"
