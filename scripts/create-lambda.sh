@@ -7,7 +7,7 @@ cd ${DIR}/..
 
 FUNCTION=${FUNCTION:="ept-serve-tiles"}
 REGION=${REGION:="us-east-1"}
-ROLE_ARN=${ROLE:=lambda_execution}
+ROLE_ARN=${ROLE:=$API_GATEWAY_LAMBDA_ROLE}
 
 echo "Creating lambda function"
 echo "  Function: ${FUNCTION}"
@@ -20,6 +20,6 @@ aws lambda create-function \
     --role ${ROLE} \
     --region ${REGION} \
     --function-name ${FUNCTION} \
-    --zip-file fileb://lambda.zip \
+    --zip-file fileb://package/lambda.zip \
     --handler "lib/lambda.handler" &&
 echo "Done"

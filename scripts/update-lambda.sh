@@ -8,7 +8,7 @@ cd ${DIR}/..
 FUNCTION=${FUNCTION:="ept-serve-tiles"}
 REGION=${REGION:="us-east-1"}
 
-if [ ! -f lambda.zip ]
+if [ ! -f package/lambda.zip ]
 then
     echo "Cannot find lambda.zip in `pwd`"
 fi
@@ -17,5 +17,5 @@ echo "Updating lambda function"
 aws lambda update-function-code \
     --function-name ${FUNCTION} \
     --region ${REGION} \
-    --zip-file fileb://lambda.zip && \
+    --zip-file fileb://package/lambda.zip && \
 echo "Done"
