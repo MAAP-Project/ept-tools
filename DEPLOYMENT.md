@@ -68,8 +68,10 @@ Test generating the deployment with synth:
 cdk synth
 ```
 
-Configure a .env file (example in `.env.sample`) with the desired `STAGE` and `ROOT`. It is uncommon to change the
-`STACKNAME`.
+Configure a .env file (example in `.env.sample`) with the desired `STAGE` and `ROOT`. It is uncommon to
+change the `STACKNAME`. The `ROOT` value should be the base URL to your assets, e.g.,
+`https://your-data-store.s3.amazonaws.com/`. If you wish to only serve a single tileset.json instead of
+allowing callers to specify the path, you can set `FILE` the path to a file that can be combined with the `ROOT` value to be a complete URL. 
 
 Deploy the stack:
 
