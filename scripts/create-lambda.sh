@@ -16,7 +16,7 @@ echo "  Role: ${ROLE_ARN}"
 echo "  Handler: lib/lambda.handler"
 
 aws lambda create-function \
-    --runtime "nodejs10.x" \
+    --runtime "nodejs12.x" \
     --role ${ROLE} \
     --region ${REGION} \
     --function-name ${FUNCTION} \

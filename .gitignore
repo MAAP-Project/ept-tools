@@ -4,3 +4,4 @@ node_modules/
 package/
 ept-tools-0.0.1.tgz
 package-lock.json
+.env
