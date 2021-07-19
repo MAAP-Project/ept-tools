@@ -16,6 +16,7 @@ inst_reqs = []
 extra_reqs = {
     "deploy": [
         "pydantic",
+        "dotenv",
         "pydantic[dotenv]",
         "docker"
     ]
