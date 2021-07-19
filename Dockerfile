@@ -4,7 +4,7 @@ WORKDIR /tmp
 
 COPY . .
 
-RUN npm run build
+RUN npm install
 RUN npm pack --unsafe-perm
 RUN tar xf ept-tools-0.0.1.tgz
 RUN cd package

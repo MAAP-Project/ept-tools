@@ -8,7 +8,5 @@ npm install -g aws-cdk
 echo "Installing python packages (pip)"
 pip install -e ".[deploy]"
 
-du -sm
-
 echo "Deploying to AWS"
 cdk deploy --all --require-approval never -vvv
