@@ -1,11 +1,16 @@
 #!/bin/bash
 set -Eeuo pipefail
-# set -x # print each command before executing
+set -x # print each command before executing
+
+npm --version
+
+npm pack --unsafe-perm
 
 echo "Installing aws cdk (npm)"
 npm install -g aws-cdk
-# Note: zsh users need to use ""
+
 echo "Installing python packages (pip)"
 pip install -e ".[deploy]"
 
-cdk deploy --all --require-approval never
+echo "Deploying to AWS"
+cdk deploy --all --require-approval never -vvv
