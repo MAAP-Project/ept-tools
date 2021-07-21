@@ -41,8 +41,6 @@ When deploying to GCC environments, these CDK commands are run by the GCC admini
 
 When deploying to test environment(s), these CDK commands can be run locally by a maap-data-system-services developer or on an EC2 instance configured as detailed in the previous section.
 
-`GCC_PERMISSIONS_BOUNDARY_ENABLED` is a boolean environment variable used in CDK deployment to configure whether a PermissionsBoundary should be enabled. If `GCC_PERMISSIONS_BOUNDARY_ENABLED` is `True` then all CDK-managed AWS resources will include an [AWS Permissions Boundary](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html), a requirement when deploying to a GCC-managed AWS account.
-
 Either clone this GitHub repository on the EC2 instance or scp the repository to the EC2 instance. 
 
 Connect to the EC2 instance.
@@ -50,10 +48,13 @@ Connect to the EC2 instance.
 These command assume AWS credentials have been configured in the environment, either via the 
 `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables or via `~/.aws/credentials`.
 
-Configure these shell variables:
+`GCC_PERMISSIONS_BOUNDARY_ENABLED` is a boolean environment variable used in CDK deployment to configure whether a PermissionsBoundary should be enabled. If `GCC_PERMISSIONS_BOUNDARY_ENABLED` is `True` then all CDK-managed AWS resources will include an [AWS Permissions Boundary](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html), a requirement when deploying to a GCC-managed AWS account.
+
+Configure the `GCC_PERMISSIONS_BOUNDARY_ENABLED` shell variable. When deploying to GCC, this should be set to `True`, otherwise it should be unset or set to `False`.
 
 ```bash
-export GCC_PERMISSIONS_BOUNDARY_ENABLED=False
+# **only** if deploying to GCC
+export GCC_PERMISSIONS_BOUNDARY_ENABLED=True
 ```
 
 Use pip to install the deploy dependencies:
