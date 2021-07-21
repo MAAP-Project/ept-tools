@@ -1,0 +1,55 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - cdk-deployment
+
+env:
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+
+jobs:
+  deploy:
+    environment: default
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Configure AWS credentials from MAAP AWS Account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - uses: franzbischoff/replace_envs@v1
+        env:
+          STAGE: ${{ steps.extract_branch.outputs.branch }}
+          ROOT: ${{ secrets.ROOT }}
+        with:
+          from_file: '.env.workflow'
+          to_file: '.env'
+          commit: 'false'
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+
+      - name: Install python packages (pip)"
+        run: pip install -e ".[deploy]"
+
+      - name: Deploying to AWS
+        run: cdk deploy --all --require-approval never -vvv
+
+      - run: echo "Successfully deployed."

@@ -1,0 +1,2 @@
+STAGE=${STAGE}
+ROOT=${ROOT}
